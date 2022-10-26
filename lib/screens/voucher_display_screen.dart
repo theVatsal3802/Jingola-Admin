@@ -40,15 +40,25 @@ class VoucherDisplayScreen extends StatelessWidget {
                   child: CircularProgressIndicator.adaptive(),
                 );
               }
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return VoucherListTile(
-                    data: snapshot.data!.docs[index].data(),
-                    id: snapshot.data!.docs[index].id,
-                  );
-                },
-                itemCount: snapshot.data!.docs.length,
-              );
+              return snapshot.data!.docs.isEmpty
+                  ? Center(
+                      child: Text(
+                        "No Vouchers yet!",
+                        textScaleFactor: 1,
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemBuilder: (context, index) {
+                        return VoucherListTile(
+                          data: snapshot.data!.docs[index].data(),
+                          id: snapshot.data!.docs[index].id,
+                        );
+                      },
+                      itemCount: snapshot.data!.docs.length,
+                    );
             }),
       ),
     );

@@ -27,7 +27,10 @@ class VoucherListTile extends StatelessWidget {
         ],
       ),
       onDismissed: (direction) async {
-        await OtherFunctions.deleteVoucher(id);
+        await OtherFunctions.deleteVoucher(
+          id,
+          context,
+        );
       },
       confirmDismiss: (direction) async {
         return await showDialog<bool>(

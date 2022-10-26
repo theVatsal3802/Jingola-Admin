@@ -20,7 +20,10 @@ class MenuListTile extends StatelessWidget {
     return Dismissible(
       key: ValueKey(title),
       onDismissed: (direction) async {
-        await OtherFunctions.deleteMenuItem(id);
+        await OtherFunctions.deleteMenuItem(
+          id,
+          context,
+        );
       },
       background: Row(
         mainAxisAlignment: MainAxisAlignment.start,

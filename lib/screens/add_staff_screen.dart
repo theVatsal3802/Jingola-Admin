@@ -29,6 +29,14 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
   bool isLoading = false;
 
   @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -204,6 +212,9 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                       });
                       bool valid = _formKey.currentState!.validate();
                       if (!valid) {
+                        setState(() {
+                          isLoading = false;
+                        });
                         return;
                       }
                       _formKey.currentState!.save();
@@ -216,6 +227,9 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                             ),
                           ),
                         );
+                        setState(() {
+                          isLoading = false;
+                        });
                         return;
                       }
                       bool result = await showDialog(

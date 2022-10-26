@@ -38,6 +38,13 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    imageUrlController.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     isEdit = isEditing();
@@ -184,6 +191,9 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                               FocusScope.of(context).unfocus();
                               bool valid = _formKey.currentState!.validate();
                               if (!valid) {
+                                setState(() {
+                                  isLoading = false;
+                                });
                                 return;
                               }
                               if (link == imageUrlController.text.trim()) {
@@ -205,6 +215,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                                   ? await OtherFunctions.updateCategory(
                                       widget.id,
                                       imageUrlController.text.trim(),
+                                      context,
                                     ).then(
                                       (_) {
                                         ScaffoldMessenger.of(context)
@@ -221,6 +232,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                                   : await OtherFunctions.addCategory(
                                       nameController.text.trim(),
                                       imageUrlController.text.trim(),
+                                      context,
                                     ).then(
                                       (_) {
                                         ScaffoldMessenger.of(context)

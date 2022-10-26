@@ -48,6 +48,15 @@ class _AddVoucherScreenState extends State<AddVoucherScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    codeController.dispose();
+    descriptionController.dispose();
+    imageUrlController.dispose();
+    valueController.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     isEdit = isEditing();
@@ -306,6 +315,9 @@ class _AddVoucherScreenState extends State<AddVoucherScreen> {
                           });
                           bool valid = _formKey.currentState!.validate();
                           if (!valid) {
+                            setState(() {
+                              isLoading = false;
+                            });
                             return;
                           }
                           _formKey.currentState!.save();
@@ -333,6 +345,9 @@ class _AddVoucherScreenState extends State<AddVoucherScreen> {
                                 ),
                               ),
                             );
+                            setState(() {
+                              isLoading = false;
+                            });
                             return;
                           }
                           snapshot.data ?? false
@@ -340,6 +355,7 @@ class _AddVoucherScreenState extends State<AddVoucherScreen> {
                                   desc: descriptionController.text.trim(),
                                   id: widget.id,
                                   imageUrl: imageUrlController.text.trim(),
+                                  context: context,
                                 ).then(
                                   (_) {
                                     setState(() {
@@ -359,6 +375,7 @@ class _AddVoucherScreenState extends State<AddVoucherScreen> {
                                   type: type!,
                                   value: valueController.text.trim(),
                                   imageUrl: imageUrlController.text.trim(),
+                                  context: context,
                                 ).then(
                                   (_) {
                                     setState(() {
