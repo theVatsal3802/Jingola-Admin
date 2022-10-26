@@ -12,6 +12,7 @@ import './category_display_screen.dart';
 import './chef_display_screen.dart';
 import './voucher_display_screen.dart';
 import './delivery_boy_display_screen.dart';
+import '../widgets/change_settings.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
@@ -75,6 +76,10 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              const ChangeSetting(),
               const SizedBox(
                 height: 20,
               ),

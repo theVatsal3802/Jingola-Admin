@@ -387,4 +387,34 @@ class OtherFunctions {
       );
     }
   }
+
+  static Future<bool> saveSettings({
+    required String fees,
+    required String minAmount,
+    required BuildContext context,
+  }) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("settings")
+          .doc("App Settings")
+          .update(
+        {
+          "delivery fees": fees,
+          "minimum amount": minAmount,
+        },
+      );
+      return true;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Something went wrong, please try again.",
+            textScaleFactor: 1,
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return false;
+    }
+  }
 }
