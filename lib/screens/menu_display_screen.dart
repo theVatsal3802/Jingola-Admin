@@ -21,6 +21,7 @@ class MenuDisplayScreen extends StatelessWidget {
               ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed(EditMenuScreen.routeName);
@@ -56,6 +57,7 @@ class MenuDisplayScreen extends StatelessWidget {
                       return MenuListTile(
                         id: snapshot.data!.docs[index].id,
                         title: snapshot.data!.docs[index].get("name"),
+                        instock: snapshot.data!.docs[index].get("in stock"),
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(

@@ -323,4 +323,68 @@ class OtherFunctions {
       );
     }
   }
+
+  static Future<void> markOutOfStock(String id, BuildContext context) async {
+    try {
+      await FirebaseFirestore.instance.collection("menu").doc(id).update(
+        {
+          "in stock": false,
+        },
+      ).then(
+        (_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Item Marked Out of Stock",
+                textScaleFactor: 1,
+              ),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Something went wrong, please try again.",
+            textScaleFactor: 1,
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  static Future<void> markInStock(String id, BuildContext context) async {
+    try {
+      await FirebaseFirestore.instance.collection("menu").doc(id).update(
+        {
+          "in stock": true,
+        },
+      ).then(
+        (_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Item Marked In Stock",
+                textScaleFactor: 1,
+              ),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Something went wrong, please try again.",
+            textScaleFactor: 1,
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
 }
