@@ -113,6 +113,7 @@ class OtherFunctions {
           "description": description,
           "price": price.toStringAsFixed(2),
           "isVeg": isVeg,
+          "in stock": true,
         },
       );
     } catch (e) {
@@ -153,31 +154,7 @@ class OtherFunctions {
     required BuildContext context,
   }) async {
     try {
-      await FirebaseAuth.instance.currentUser!.delete().then(
-        (_) async {
-          await FirebaseFirestore.instance.collection(role).doc(id).delete();
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "requires-recent-login") {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                "An error occurred",
-                textScaleFactor: 1,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              content: Text(
-                "Cannot delete this staff member now. Ask him to logout and login again and then try again",
-                textScaleFactor: 1,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            );
-          },
-        );
-      }
+      await FirebaseFirestore.instance.collection(role).doc(id).delete();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

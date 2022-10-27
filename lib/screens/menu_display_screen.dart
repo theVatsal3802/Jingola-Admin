@@ -52,6 +52,7 @@ class MenuDisplayScreen extends StatelessWidget {
                     ),
                   )
                 : ListView.builder(
+                    shrinkWrap: true,
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       return MenuListTile(

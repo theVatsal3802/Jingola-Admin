@@ -45,22 +45,52 @@ class StaffListTile extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: () async {
-            await OtherFunctions.deleteStaff(
-              id: id,
-              role: role,
+            final decision = await showDialog(
               context: context,
-            ).then(
-              (_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      "Staff Member removed successfully!",
-                      textScaleFactor: 1,
-                    ),
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(
+                    "Are you sure?",
+                    textScaleFactor: 1,
+                    style: Theme.of(context).textTheme.headline4,
                   ),
+                  content: Text(
+                    "Make sure you delete the Authentication Details from the Firebase Authentication dashboard.",
+                    textScaleFactor: 1,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                      child: const Text(
+                        "NO",
+                        textScaleFactor: 1,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                      child: const Text(
+                        "YES",
+                        textScaleFactor: 1,
+                      ),
+                    ),
+                  ],
                 );
               },
             );
+            if (decision) {
+              await OtherFunctions.deleteStaff(
+                id: id,
+                role: role,
+                context: context,
+              );
+            } else {
+              return;
+            }
           },
           icon: const Icon(
             Icons.delete,

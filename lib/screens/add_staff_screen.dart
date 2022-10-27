@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './home_screen.dart';
 import '../functions/other_functions.dart';
+import './auth_screen.dart';
 
 class AddStaffScreen extends StatefulWidget {
   static const routeName = "/add-staff";
@@ -243,7 +243,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                               style: Theme.of(context).textTheme.headline4,
                             ),
                             content: Text(
-                              "You will be re-directed to the home screen",
+                              "You will be logged out due too security reasons and then auto logged in. You can login again to continue your work if you are not auto logged in.",
                               textScaleFactor: 1,
                               style: Theme.of(context).textTheme.headline6,
                             ),
@@ -288,7 +288,7 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
                             isLoading = false;
                           });
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            HomeScreen.routeName,
+                            AuthScreen.routeName,
                             (route) => false,
                           );
                         },
