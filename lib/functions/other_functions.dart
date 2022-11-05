@@ -394,4 +394,62 @@ class OtherFunctions {
       return false;
     }
   }
+
+  static Future<bool> addBanner({
+    required String imageUrl,
+    required BuildContext context,
+  }) async {
+    try {
+      await FirebaseFirestore.instance.collection("ads").add(
+        {
+          "imageUrl": imageUrl,
+        },
+      );
+      return true;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Something went wrong, please try again.",
+            textScaleFactor: 1,
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return false;
+    }
+  }
+
+  static Future<bool> deleteBanner({
+    required String id,
+    required BuildContext context,
+  }) async {
+    try {
+      await FirebaseFirestore.instance.collection("ads").doc(id).delete().then(
+        (_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Advertisement Deleted",
+                textScaleFactor: 1,
+              ),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        },
+      );
+      return true;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Something went wrong, please try again.",
+            textScaleFactor: 1,
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return false;
+    }
+  }
 }

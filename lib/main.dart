@@ -18,6 +18,8 @@ import './screens/add_voucher_screen.dart';
 import './screens/chef_display_screen.dart';
 import './screens/manager_display_screen.dart';
 import './screens/add_staff_screen.dart';
+import './screens/add_ad_banner_screen.dart';
+import './screens/edit_banner_screen.dart';
 import './config/theme.dart';
 
 void main() async {
@@ -76,6 +78,8 @@ class MyApp extends StatelessWidget {
               data: {},
               id: "",
             ),
+        AddAdBannerScreen.routeName: (context) => const AddAdBannerScreen(),
+        EditBannerScreen.routeName: (context) => const EditBannerScreen(),
       },
     );
   }

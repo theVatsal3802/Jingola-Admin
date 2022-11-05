@@ -12,6 +12,7 @@ import './category_display_screen.dart';
 import './chef_display_screen.dart';
 import './voucher_display_screen.dart';
 import './delivery_boy_display_screen.dart';
+import './edit_banner_screen.dart';
 import '../widgets/change_settings.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -173,6 +174,17 @@ class HomeScreen extends StatelessWidget {
                     },
                     leading: const Icon(
                       Icons.delivery_dining,
+                      size: 48,
+                    ),
+                  ),
+                  HomeListTile(
+                    title: "Edit Advertisement Banners",
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(EditBannerScreen.routeName);
+                    },
+                    leading: const Icon(
+                      Icons.add_to_queue,
                       size: 48,
                     ),
                   ),
